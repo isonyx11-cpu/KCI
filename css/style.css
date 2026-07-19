@@ -16,7 +16,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    cursor: none;
 }
 
 html, body {
@@ -29,21 +28,32 @@ html, body {
     scroll-behavior: smooth;
 }
 
-/* Custom Interactive Cursor */
+/* --- Premium Custom Interactive Cursor --- */
 .custom-cursor {
     width: 20px;
     height: 20px;
     background: radial-gradient(circle, var(--accent-cyan) 0%, rgba(0,200,150,0.4) 100%);
     border-radius: 50%;
     position: fixed;
-    pointer-events: none;
-    z-index: 9999;
+    pointer-events: none; /* CRITICAL: Prevents custom cursor from blocking clicks underneath it */
+    z-index: 99999;       /* Dominates the game overlay's 1000 z-index layer seamlessly */
     transform: translate(-50%, -50%);
     mix-blend-mode: screen;
     box-shadow: 0 0 15px var(--primary-emerald);
     transition: transform 0.1s ease-out;
 }
 
+/* Hide default cursor only when interacting with the portfolio elements */
+#main-portfolio, #main-portfolio * {
+    cursor: none;
+}
+
+/* Fallback: Ensure clear visibility of system cursor inside landing/auth state for easy tracking */
+#game-gate, #game-gate * {
+    cursor: auto;
+}
+
+/* --- 3D Scene Layer --- */
 #three-canvas-container {
     position: fixed;
     top: 0;
@@ -54,7 +64,7 @@ html, body {
     pointer-events: none;
 }
 
-/* Glassmorphism Styling */
+/* --- Liquid Glassmorphism Cards Layouts --- */
 .glass-card {
     background: var(--glass-white);
     backdrop-filter: blur(25px) saturate(180%);
@@ -72,7 +82,7 @@ html, body {
     box-shadow: 0 12px 40px 0 rgba(0, 200, 150, 0.15);
 }
 
-/* Timing Stabilization Mini-game Layout Styles */
+/* --- Timing Stabilization Minigame Overlay Section --- */
 .game-overlay {
     position: fixed;
     top: 0;
@@ -181,7 +191,7 @@ html, body {
     margin-top: 20px;
 }
 
-/* Portfolio Content Display Control states */
+/* --- Portfolio Application Core Framework Structure --- */
 .portfolio-hidden {
     opacity: 0;
     pointer-events: none;
@@ -195,7 +205,6 @@ html, body {
     transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
-/* Structural Components Layouts */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -214,6 +223,7 @@ html, body {
     align-items: center;
 }
 
+/* --- Header & Navigation --- */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -250,7 +260,7 @@ html, body {
 
 .nav-links a:hover { color: var(--primary-emerald); }
 
-/* Sections */
+/* --- Hero Section Elements --- */
 .hero-section {
     height: 100vh;
     display: flex;
@@ -279,6 +289,7 @@ html, body {
 .hero-bio { font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px; max-width: 600px; }
 .hero-cta-group { display: flex; gap: 20px; }
 
+/* --- Global Button Architecture --- */
 .btn {
     padding: 14px 28px;
     border-radius: 8px;
@@ -294,26 +305,28 @@ html, body {
 .btn-tertiary { color: var(--text-muted); padding: 14px 0; }
 .btn-tertiary:hover { color: var(--primary-emerald); }
 
-/* About and Counters */
+/* --- Profile Visuals & Data Counters --- */
 .profile-image-frame { width: 320px; height: 320px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
 .placeholder-avatar { width: 280px; height: 280px; border-radius: 50%; background: linear-gradient(135deg, rgba(7,17,31,1) 0%, rgba(0,200,150,0.1) 100%); display: flex; justify-content: center; align-items: center; font-family: var(--font-heading); font-size: 4rem; color: var(--primary-emerald); }
 .section-title { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 25px; }
 .center { text-align: center; margin-bottom: 60px; }
 .bio-paragraph { color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; }
+
 .animated-counters { display: flex; gap: 20px; }
 .counter-box { flex: 1; padding: 25px; text-align: center; }
 .counter-num { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 700; color: #FFF; }
 .counter-label { font-family: var(--font-accent); font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-top: 5px; }
 
-/* Competencies Grid */
+/* --- Competencies Grid Array --- */
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 50px; }
 .skill-card { padding: 30px; }
 .skill-card h3 { font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 12px; color: #FFF; }
 .skill-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
 .learning-alert { display: flex; align-items: center; padding: 25px 35px; border-left: 4px solid var(--primary-emerald); }
 .pulse-indicator { width: 10px; height: 10px; background-color: var(--primary-emerald); border-radius: 50%; margin-right: 20px; }
 
-/* Timeline Components */
+/* --- Vertical Clinical Timeline Elements --- */
 .vertical-timeline { position: relative; max-width: 800px; margin: 0 auto; }
 .vertical-timeline::before { content: ''; position: absolute; top: 0; left: 40px; width: 2px; height: 100%; background: linear-gradient(to bottom, var(--primary-emerald), rgba(255,255,255,0.02)); }
 .timeline-item { margin-left: 80px; margin-bottom: 50px; padding: 35px; }
@@ -322,21 +335,22 @@ html, body {
 .timeline-item h4 { color: var(--primary-emerald); margin-bottom: 15px; font-weight: 500; }
 .timeline-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
-/* Healthcare Projects Cards Layout */
+/* --- Informatics Projects Structure --- */
 .projects-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 .project-card { padding: 30px; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; }
 .project-art-vial { height: 100px; margin-bottom: 30px; background: linear-gradient(180deg, rgba(0,200,150,0.05) 0%, rgba(0,200,150,0) 100%); border-radius: 8px; border: 1px solid rgba(0,200,150,0.1); }
 .project-card h3 { font-family: var(--font-heading); font-size: 1.4rem; color: #FFF; margin-bottom: 10px; }
 .project-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
-.development-node { border: 1px dashed rgba(0, 229, 255, 0.3); }
+.development-node { border: 1px dashed rgba(0, 229, 255, 0.3); position: relative; overflow: hidden; }
 
-/* Form Fields Setup */
+/* --- Contact & Input Form Fields --- */
 .contact-info-block { padding: 50px; }
 .contact-info-block h2 { font-family: var(--font-heading); color: #FFF; font-size: 2rem; margin-bottom: 15px; }
 .meta-row { margin: 20px 0; color: var(--text-muted); }
 .meta-row strong { color: #FFF; margin-right: 10px; }
 .social-links-grid { margin-top: 40px; display: flex; gap: 20px; }
 .social-links-grid a { color: var(--primary-emerald); text-decoration: none; font-weight: 600; }
+
 .contact-form-block { padding: 40px; }
 .input-group { margin-bottom: 25px; display: flex; flex-direction: column; }
 .input-group label { font-family: var(--font-accent); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
@@ -344,4 +358,6 @@ html, body {
 .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--primary-emerald); }
 .btn.fluid { width: 100%; text-align: center; }
 .form-feedback { margin-top: 15px; font-size: 0.9rem; text-align: center; }
+
+/* --- Footer --- */
 .main-footer { padding: 40px 0; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-muted); font-size: 0.85rem; margin-top: 80px; }
